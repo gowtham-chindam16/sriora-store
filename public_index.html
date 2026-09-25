@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sriora Crochet Creations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --cream: #fffaf7;
+        --rose: #f4d9d5;
+        --rose-strong: #d48a82;
+        --maroon: #9a4d4d;
+        --maroon-deep: #6f3131;
+        --card: #ffffff;
+        --text: #2d1e1d;
+        --muted: #6d5553;
+        --line: #f1d9d4;
+        --green: #6f8f76;
+        --shadow: 0 18px 45px rgba(104, 54, 54, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(180deg, #fffaf7 0%, #fff 100%);
+        color: var(--text);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a { text-decoration: none; }
+
+      button, input, textarea {
+        font: inherit;
+      }
+
+      .topbar {
+        background: linear-gradient(120deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+        color: white;
+        text-align: center;
+        padding: 26px 18px 18px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topbar::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 25%, rgba(255,255,255,0.18), transparent 28%),
+                    radial-gradient(circle at 80% 35%, rgba(255,255,255,0.14), transparent 25%);
+      }
+
+      .brand-wrap {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .brand-mark {
+        display: none;
+      }
+
+      .brand-title {
+        display: none;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .brand-photo {
+        width: min(62vw, 380px);
+        aspect-ratio: 1;
+        object-fit: cover;
+        display: block;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.78);
+        box-shadow: 0 0 0 7px rgba(208, 125, 117, 0.14);
+        background: #f8efe8;
+      }
+
+      .corner-logo {
+        display: none;
+      }
+
+      .tagline {
+        background: #f8e5e1;
+        color: var(--maroon-deep);
+        padding: 12px 18px;
+        text-align: center;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+      }
+
+      .section-head {
+        text-align: center;
+        margin-bottom: 26px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2.1rem, 3vw, 3rem);
+        color: var(--maroon);
+        letter-spacing: 0.08em;
+      }
+
+      .section-head p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 22px;
+        min-height: 0;
+      }
+
+      .cta-btn,
+      .small-btn,
+      .delete-btn,
+      .secondary-btn {
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-btn {
+        background: linear-gradient(120deg, var(--maroon), var(--maroon-deep));
+        color: white;
+        padding: 12px 20px;
+        font-weight: 600;
+        box-shadow: 0 10px 18px rgba(128, 68, 68, 0.18);
+      }
+
+      .small-btn {
+        background: var(--green);
+        color: white;
+        padding: 10px 16px;
+      }
+
+      .secondary-btn {
+        background: transparent;
+        border: 1px solid var(--maroon);
+        color: var(--maroon);
+        padding: 10px 16px;
+      }
+
+      .delete-btn {
+        background: #d5655f;
+        color: white;
+        padding: 10px 16px;
+      }
+
+      .admin-btn:hover,
+      .cta-btn:hover,
+      .small-btn:hover,
+      .delete-btn:hover,
+      .secondary-btn:hover {
+        transform: translateY(-1px);
+        opacity: 0.96;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .product-card {
+        background: var(--card);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(157, 86, 86, 0.08);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.24s ease, box-shadow 0.24s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 50px rgba(104, 54, 54, 0.15);
+      }
+
+      .product-image {
+        height: 220px;
+        background: linear-gradient(135deg, #f5e5e1, #f8efee);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(157, 86, 86, 0.06);
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        background: #fffaf7;
+      }
+
+      .product-gallery-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        padding: 12px 12px 0;
+      }
+
+      .product-gallery-thumb {
+        width: 100%;
+        height: 42px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid rgba(157, 86, 86, 0.12);
+        background: #f8f0ef;
+        display: block;
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(255,255,255,0.8);
+        backdrop-filter: blur(4px);
+        color: var(--maroon);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        padding: 7px 10px;
+        border-radius: 999px;
+      }
+
+      .product-body {
+        padding: 14px 14px 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .product-title {
+        margin: 0 0 6px;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.6rem;
+        line-height: 1.1;
+        color: var(--maroon);
+      }
+
+      .product-desc {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.5;
+        flex: 1;
+        font-size: 0.9rem;
+      }
+
+      .product-price {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.7rem;
+        color: var(--maroon-deep);
+        margin: 0 0 12px;
+      }
+
+      .enquire-btn {
+        width: 100%;
+        background: linear-gradient(120deg, #e3877f, #d46f6f);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 48px 20px;
+        color: var(--muted);
+        border: 1px dashed var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,0.4);
+      }
+
+      .photo-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(27, 17, 18, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 80;
+      }
+
+      .photo-modal.show {
+        display: flex;
+      }
+
+      .photo-modal-box {
+        width: min(92vw, 780px);
+        background: rgba(255,255,255,0.96);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 26px 75px rgba(0,0,0,0.25);
+      }
+
+      .photo-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        background: linear-gradient(120deg, var(--maroon), var(--maroon-deep));
+        color: white;
+      }
+
+      .photo-topbar h3 {
+        margin: 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem;
+        letter-spacing: 0.06em;
+      }
+
+      .photo-close {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      .photo-stage-wrap {
+        background: #faf4f2;
+        padding: 18px;
+      }
+
+      .photo-stage {
+        width: 100%;
+        aspect-ratio: 1.05;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5e5e1, #f7f0ee);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .photo-stage img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 18px 18px 22px;
+      }
+
+      .photo-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(154, 77, 77, 0.2);
+        background: white;
+        color: var(--maroon-deep);
+        font-size: 1.7rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .photo-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .photo-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(154, 77, 77, 0.25);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .photo-dot.active {
+        background: var(--maroon);
+        transform: scale(1.12);
+      }
+
+      @media (max-width: 900px) {
+        .product-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(35, 18, 18, 0.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 50;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-box {
+        background: white;
+        border-radius: 28px;
+        width: min(100%, 860px);
+        overflow: hidden;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+      }
+
+      .modal-header {
+        background: linear-gradient(120deg, var(--maroon), var(--maroon-deep));
+        color: white;
+        padding: 20px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-family: 'Cormorant Garamond', serif;
+        letter-spacing: 0.06em;
+      }
+
+      .close-btn {
+        border: none;
+        background: transparent;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        padding: 26px 22px 30px;
+      }
+
+      .auth-panel,
+      .dashboard-panel {
+        display: none;
+      }
+
+      .auth-panel.show,
+      .dashboard-panel.show {
+        display: block;
+      }
+
+      .auth-form,
+      .product-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--maroon-deep);
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+      }
+
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .manage-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .manage-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff9f8;
+      }
+
+      .manage-thumb {
+        width: 82px;
+        height: 82px;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #f5e3df;
+        flex-shrink: 0;
+      }
+
+      .manage-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .manage-info {
+        flex: 1;
+      }
+
+      .manage-info h4 {
+        margin: 0 0 5px;
+        color: var(--maroon-deep);
+      }
+
+      .manage-info p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .error-text {
+        min-height: 20px;
+        color: #c94a4a;
+        font-size: 0.92rem;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--line);
+        margin: 26px 0 18px;
+      }
+
+      @media (max-width: 600px) {
+        .toolbar { justify-content: center; }
+        .manage-item {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .manage-thumb {
+          width: 100%;
+          height: 180px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-wrap">
+        <img class="brand-photo" src="/WhatsApp%20Image%202026-08-04%20at%201.12.58%20PM.jpeg" alt="Sriora Crochet Creations" />
+      </div>
+    </header>
+
+    <div class="tagline">Crafted with care • made to be cherished</div>
+
+    <main class="container">
+      <div class="section-head">
+        <h2>Our Collection</h2>
+        <p>Browse beautifully handmade pieces and enquire directly on Instagram.</p>
+      </div>
+
+      <div class="toolbar"></div>
+
+      <div id="productsGrid" class="product-grid"></div>
+    </main>
+
+    <div id="photoModal" class="photo-modal" aria-modal="true" role="dialog">
+      <div class="photo-modal-box">
+        <div class="photo-topbar">
+          <h3 id="photoModalTitle">Product Photos</h3>
+          <button class="photo-close" id="closePhotoModalBtn" aria-label="Close">×</button>
+        </div>
+        <div class="photo-stage-wrap">
+          <div class="photo-stage">
+            <img id="photoModalImage" src="" alt="Product photo" />
+          </div>
+        </div>
+        <div class="photo-controls">
+          <button class="photo-arrow" id="prevPhotoBtn" type="button" aria-label="Previous photo">&#8592;</button>
+          <div id="photoDots" class="photo-dots" aria-label="Photo navigation"></div>
+          <button class="photo-arrow" id="nextPhotoBtn" type="button" aria-label="Next photo">&#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="adminModal" class="modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3>Admin Panel</h3>
+          <button class="close-btn" id="closeAdminBtn" aria-label="Close">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="authPanel" class="auth-panel show">
+            <form id="loginForm" class="auth-form">
+              <div class="field">
+                <label for="username">Username</label>
+                <input id="username" type="text" placeholder="Enter username" required />
+              </div>
+
+              <div class="field">
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Enter password" required />
+              </div>
+
+              <div class="form-actions">
+                <button class="cta-btn" type="submit">Login</button>
+              </div>
+
+              <div id="loginError" class="error-text"></div>
+            </form>
+          </div>
+
+          <div id="dashboardPanel" class="dashboard-panel">
+            <div class="form-actions" style="margin-bottom: 14px;">
+              <button class="small-btn" id="showAddFormBtn">Add Product</button>
+              <button class="delete-btn" id="logoutBtn">Logout</button>
+            </div>
+
+            <form id="productForm" class="product-form" enctype="multipart/form-data">
+              <div class="field">
+                <label for="productName">Product Name</label>
+                <input id="productName" type="text" required />
+              </div>
+
+              <div class="field">
+                <label for="productDescription">Description</label>
+                <textarea id="productDescription"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="productPrice">Price</label>
+                <input id="productPrice" type="number" min="0" step="0.01" required />
+              </div>
+
+              <div class="field">
+                <label for="productPhotos">Photos</label>
+                <input id="productPhotos" type="file" accept="image/*" multiple />
+              </div>
+
+              <div class="form-actions">
+                <button class="cta-btn" type="submit">Save Product</button>
+                <button class="secondary-btn" type="button" id="resetFormBtn">Reset</button>
+              </div>
+            </form>
+
+            <hr class="divider" />
+
+            <h3 style="margin:0 0 12px; color: var(--maroon-deep);">Manage Products</h3>
+            <div id="manageList" class="manage-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const productsGrid = document.getElementById('productsGrid');
+      const adminModal = document.getElementById('adminModal');
+      const authPanel = document.getElementById('authPanel');
+      const dashboardPanel = document.getElementById('dashboardPanel');
+      const loginForm = document.getElementById('loginForm');
+      const productForm = document.getElementById('productForm');
+      const manageList = document.getElementById('manageList');
+      const loginError = document.getElementById('loginError');
+      const photoModal = document.getElementById('photoModal');
+      const photoModalImage = document.getElementById('photoModalImage');
+      const photoModalTitle = document.getElementById('photoModalTitle');
+      const photoDots = document.getElementById('photoDots');
+      const prevPhotoBtn = document.getElementById('prevPhotoBtn');
+      const nextPhotoBtn = document.getElementById('nextPhotoBtn');
+
+      const state = {
+        products: [],
+        token: localStorage.getItem('srioraToken') || ''
+      };
+
+      let galleryProductId = null;
+      let galleryIndex = 0;
+
+      function formatPrice(value) {
+        return new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          maximumFractionDigits: 0
+        }).format(Number(value || 0));
+      }
+
+      function makeFallbackPhoto(productName) {
+        const palette = ['#f4d9d5', '#f8e7d0', '#dfe8d8', '#e3dff4'];
+        const emojiMap = ['🧶', '🧣', '🧸', '🎀', '👜'];
+        const color = palette[Math.abs(productName.length) % palette.length];
+        const emoji = emojiMap[Math.abs(productName.charCodeAt(0)) % emojiMap.length];
+        return `data:image/svg+xml;utf8,${encodeURIComponent(`
+          <svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'>
+            <rect width='800' height='800' fill='${color}'/>
+            <circle cx='400' cy='300' r='120' fill='rgba(255,255,255,0.25)'/>
+            <text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' font-size='160' font-family='Arial'>${emoji}</text>
+          </svg>
+        `)}`;
+      }
+
+      function getProductPhotos(product) {
+        return product.photos && product.photos.length ? product.photos : [makeFallbackPhoto(product.name)];
+      }
+
+      function updatePhotoGalleryView() {
+        const product = state.products.find((item) => String(item.id) === String(galleryProductId));
+        if (!product) return;
+
+        const photos = getProductPhotos(product);
+        if (!photos.length) return;
+        const safeIndex = ((galleryIndex % photos.length) + photos.length) % photos.length;
+        galleryIndex = safeIndex;
+
+        photoModalImage.src = photos[safeIndex];
+        photoModalImage.alt = `${product.name} photo ${safeIndex + 1}`;
+        photoModalTitle.textContent = product.name;
+
+        photoDots.innerHTML = photos.map((_, index) => `
+          <button
+            class="photo-dot ${index === safeIndex ? 'active' : ''}"
+            type="button"
+            data-dot-index="${index}"
+            aria-label="View photo ${index + 1}"
+          ></button>
+        `).join('');
+
+        photoDots.querySelectorAll('.photo-dot').forEach((dot) => {
+          dot.addEventListener('click', () => {
+            galleryIndex = Number(dot.getAttribute('data-dot-index'));
+            updatePhotoGalleryView();
+          });
+        });
+      }
+
+      function openPhotoGallery(productId, index = 0) {
+        galleryProductId = productId;
+        galleryIndex = index;
+        updatePhotoGalleryView();
+        photoModal.classList.add('show');
+      }
+
+      function closePhotoGallery() {
+        photoModal.classList.remove('show');
+      }
+
+      function renderProducts() {
+        if (!state.products.length) {
+          productsGrid.innerHTML = '<div class="empty-state">No products yet. Add your first handmade piece from the admin panel.</div>';
+          return;
+        }
+
+        productsGrid.innerHTML = state.products.map((product) => {
+          const photos = getProductPhotos(product);
+          const previewPhoto = photos[0];
+          const thumbPhotos = photos.slice(1, 5);
+          const galleryMarkup = thumbPhotos.length
+            ? `<div class="product-gallery-strip">${thumbPhotos.map((photo, index) => `<img class="product-gallery-thumb" src="${photo}" alt="${product.name}" data-product-id="${product.id}" data-gallery-index="${index + 1}" />`).join('')}</div>`
+            : '';
+
+          return `
+            <article class="product-card">
+              <div class="product-image">
+                <img src="${previewPhoto}" alt="${product.name}" data-product-id="${product.id}" data-gallery-index="0" />
+                <span class="product-badge">Handmade</span>
+              </div>
+              ${galleryMarkup}
+              <div class="product-body">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-desc">${product.description || 'Beautiful, handcrafted, and made with love.'}</p>
+                <div class="product-price">${formatPrice(product.price)}</div>
+                <button class="enquire-btn" data-id="${product.id}">Enquire on Instagram</button>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        productsGrid.querySelectorAll('img[data-product-id]').forEach((image) => {
+          image.addEventListener('click', () => {
+            const productId = image.getAttribute('data-product-id');
+            const galleryIndexValue = Number(image.getAttribute('data-gallery-index') || 0);
+            openPhotoGallery(productId, galleryIndexValue);
+          });
+        });
+
+        productsGrid.querySelectorAll('[data-id]').forEach((button) => {
+          button.addEventListener('click', async () => {
+            const id = button.getAttribute('data-id');
+            const res = await fetch(`/api/products/${id}/instagram`);
+            const data = await res.json();
+            if (data.instagramLink) {
+              window.open(data.instagramLink, '_blank');
+            }
+          });
+        });
+      }
+
+      async function loadProducts() {
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        state.products = Array.isArray(data) ? data : [];
+        renderProducts();
+      }
+
+      function openAdmin() {
+        adminModal.classList.add('show');
+        if (state.token) {
+          authPanel.classList.remove('show');
+          dashboardPanel.classList.add('show');
+          loadManageProducts();
+        } else {
+          authPanel.classList.add('show');
+          dashboardPanel.classList.remove('show');
+        }
+      }
+
+      function closeAdmin() {
+        adminModal.classList.remove('show');
+      }
+
+      document.getElementById('closeAdminBtn').addEventListener('click', closeAdmin);
+      adminModal.addEventListener('click', (event) => {
+        if (event.target === adminModal) closeAdmin();
+      });
+
+      document.getElementById('closePhotoModalBtn').addEventListener('click', closePhotoGallery);
+      photoModal.addEventListener('click', (event) => {
+        if (event.target === photoModal) closePhotoGallery();
+      });
+
+      prevPhotoBtn.addEventListener('click', () => {
+        const product = state.products.find((item) => String(item.id) === String(galleryProductId));
+        if (!product) return;
+        const photos = getProductPhotos(product);
+        galleryIndex = (galleryIndex - 1 + photos.length) % photos.length;
+        updatePhotoGalleryView();
+      });
+
+      nextPhotoBtn.addEventListener('click', () => {
+        const product = state.products.find((item) => String(item.id) === String(galleryProductId));
+        if (!product) return;
+        const photos = getProductPhotos(product);
+        galleryIndex = (galleryIndex + 1) % photos.length;
+        updatePhotoGalleryView();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (!photoModal.classList.contains('show')) return;
+        if (event.key === 'Escape') closePhotoGallery();
+        if (event.key === 'ArrowRight') nextPhotoBtn.click();
+        if (event.key === 'ArrowLeft') prevPhotoBtn.click();
+      });
+
+      loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        loginError.textContent = '';
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          loginError.textContent = data.error || 'Login failed';
+          return;
+        }
+
+        state.token = data.token;
+        localStorage.setItem('srioraToken', data.token);
+        loginForm.reset();
+        openAdmin();
+      });
+
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        state.token = '';
+        localStorage.removeItem('srioraToken');
+        authPanel.classList.add('show');
+        dashboardPanel.classList.remove('show');
+      });
+
+      async function loadManageProducts() {
+        if (!state.token) return;
+
+        const res = await fetch('/api/admin/products', {
+          headers: { Authorization: `Bearer ${state.token}` }
+        });
+        if (!res.ok) {
+          console.error('Unable to fetch admin products');
+          return;
+        }
+
+        const products = await res.json();
+        manageList.innerHTML = products.map((product) => {
+          const photo = product.photos && product.photos.length ? product.photos[0] : makeFallbackPhoto(product.name);
+          return `
+            <div class="manage-item">
+              <div class="manage-thumb"><img src="${photo}" alt="${product.name}" /></div>
+              <div class="manage-info">
+                <h4>${product.name}</h4>
+                <p>${formatPrice(product.price)}</p>
+              </div>
+              <div class="form-actions">
+                <button class="delete-btn" data-delete-id="${product.id}">Delete</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        manageList.querySelectorAll('[data-delete-id]').forEach((button) => {
+          button.addEventListener('click', async () => {
+            const id = button.getAttribute('data-delete-id');
+            const res = await fetch(`/api/admin/products/${id}`, {
+              method: 'DELETE',
+              headers: { Authorization: `Bearer ${state.token}` }
+            });
+            if (res.ok) {
+              loadProducts();
+              loadManageProducts();
+            }
+          });
+        });
+      }
+
+      productForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        const name = document.getElementById('productName').value.trim();
+        const description = document.getElementById('productDescription').value;
+        const price = document.getElementById('productPrice').value;
+        const files = document.getElementById('productPhotos').files;
+
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('price', price);
+
+        for (const file of files) {
+          formData.append('photos', file);
+        }
+
+        const res = await fetch('/api/admin/products', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${state.token}` },
+          body: formData
+        });
+
+        if (res.ok) {
+          productForm.reset();
+          loadProducts();
+          loadManageProducts();
+        }
+      });
+
+      document.getElementById('resetFormBtn').addEventListener('click', () => productForm.reset());
+      document.getElementById('showAddFormBtn').addEventListener('click', () => {
+        productForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      const hash = (window.location.hash || '').replace('#', '').trim().toLowerCase();
+      const isAdminRoute = hash === 'admin-panel';
+
+      loadProducts();
+      if (state.token || isAdminRoute) openAdmin();
+    </script>
+  </body>
+</html>

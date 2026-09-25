@@ -1,0 +1,13 @@
+[
+  {
+    "id": "e03a64cf-3727-484b-bc46-d92bfe8bb85b",
+    "name": "project logo",
+    "description": "qwertyuiop",
+    "price": 1234,
+    "photos": [
+      "/uploads/1790322933120-694658b1-0bce-4fcd-8e81-576c745d6843.jpeg"
+    ],
+    "createdAt": "2026-09-25T07:55:33.126Z",
+    "updatedAt": "2026-09-25T07:55:33.126Z"
+  }
+]
